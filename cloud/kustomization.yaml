@@ -10,5 +10,6 @@ resources:
   - redis-service.yaml
 
   - cscart-service.yaml
-  - cscart-pv.yaml
+  - cscart-pv-files.yaml
+  - cscart-pv-images.yaml
   - cscart.yaml
