@@ -1,0 +1,14 @@
+resources:
+  - mariadb-secret.yaml
+  - mariadb-pv.yaml
+  - mariadb.yaml
+  - mariadb-service.yaml
+
+  - redis-secret.yaml
+  - redis-pv.yaml
+  - redis.yaml
+  - redis-service.yaml
+
+  - cscart-service.yaml
+  - cscart-pv.yaml
+  - cscart.yaml

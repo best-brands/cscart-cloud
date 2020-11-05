@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cscart
+  labels:
+    app: cscart
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cscart
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cscart
+    spec:
+      containers:
+        - image: cscart
+          imagePullPolicy: IfNotPresent
+          name: cscart
+          ports:
+            - containerPort: 80
+              name: cscart
+          env:
+            - name: CSCART_DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: database
+            - name: CSCART_DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: user
+            - name: CSCART_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: password
+            - name: CSCART_DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb
+                  key: host
+            - name: CSCART_REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: redis
+                  key: host
+          volumeMounts:
+            - name: cscart
+              mountPath: /var/www/cscart/images
+            - name: cscart
+              mountPath: /var/www/cscart/var/files
+      volumes:
+        - name: cscart
+          persistentVolumeClaim:
+            claimName: cscart-pv-claim

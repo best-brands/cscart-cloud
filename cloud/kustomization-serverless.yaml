@@ -1,0 +1,4 @@
+resources:
+  - cscart-service.yaml
+  - cscart-pv.yaml
+  - cscart.yaml
